@@ -5,12 +5,12 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCardIcon from "@mui/icons-material/ShoppingCart";
 
-const Navbar = ({ setIsAdminVisible }) => {
-
+const Navbar = () => {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -32,7 +32,7 @@ const Navbar = ({ setIsAdminVisible }) => {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow:1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -41,16 +41,17 @@ const Navbar = ({ setIsAdminVisible }) => {
               <MenuIcon />
             </IconButton>
           </Box>
-          <Box sx={{ flexGrow:1, display: { xs: "none", md: "flex" } }}>
-            <Button
-              onClick={() => setIsAdminVisible(true)}
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              Admin
-            </Button>
-            <Button sx={{ my: 2, color: "white", display: "block" }}>
-              Shop
-            </Button>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            <Link to="/admin" style={{ textDecoration: "none" }}>
+              <Button sx={{ my: 2, color: "white", display: "block" }}>
+                Admin
+              </Button>
+            </Link>
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <Button sx={{ my: 2, color: "white", display: "block" }}>
+                Shop
+              </Button>
+            </Link>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <IconButton sx={{ p: 0 }}>
