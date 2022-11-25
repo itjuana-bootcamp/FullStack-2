@@ -4,7 +4,7 @@ import Stack from "@mui/system/Stack";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
-const ProductAdmin = ({ product }) => {
+const ProductAdmin = ({ product, handleOnEdit, handleOnDelete }) => {
   return (
     <>
       <Box sx={{ backgroundColor: "gray", height: 480, boxShadow: 3 }}>
@@ -31,6 +31,7 @@ const ProductAdmin = ({ product }) => {
       </Box>
       <Stack direction="row">
         <Button
+          onClick={() => handleOnEdit(product)}
           sx={{
             background: "yellow",
             height: 64,
@@ -44,6 +45,7 @@ const ProductAdmin = ({ product }) => {
           EDIT
         </Button>
         <Button
+          onClick={() => handleOnDelete(product._id)}
           sx={{
             background: "red",
             height: 64,
