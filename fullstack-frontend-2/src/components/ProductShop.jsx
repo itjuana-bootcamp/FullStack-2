@@ -4,11 +4,12 @@ import Button from "@mui/material/Button";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Typography } from "@mui/material";
 
-const ProductShop = ({ product }) => {
+const ProductShop = ({ product, onAdd }) => {
   return (
     <>
       <ProductInfo product={product} />
       <Button
+        onClick={() => onAdd(product._id)}
         sx={{
           background: "yellow",
           height: 64,
