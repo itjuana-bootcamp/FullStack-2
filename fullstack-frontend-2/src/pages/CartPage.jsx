@@ -1,42 +1,47 @@
-import { Button, Container, Paper, Typography } from "@mui/material"
-import ProductListCart from "../components/ProductListCart"
+import { useNavigate } from "react-router-dom";
+import { Button, Container, Paper, Typography } from "@mui/material";
+import ProductListCart from "../components/ProductListCart";
 
 const CartPage = ({ cartProducts, setCartProducts }) => {
+  const total = cartProducts
+    .map((cp) => cp.qty * cp.price)
+    .reduce((prev, curr) => prev + curr, 0)
+    .toFixed(2);
 
-  const total = cartProducts.map(cp => cp.qty * cp.price).reduce((prev, curr) => prev + curr, 0).toFixed(2)
+  const navigate = useNavigate();
 
-  const handleLess = id => {
-    const tempCartProducts = Array.from(cartProducts)
-    const productIndex = tempCartProducts.findIndex(p => p._id === id)
+  const handleLess = (id) => {
+    const tempCartProducts = Array.from(cartProducts);
+    const productIndex = tempCartProducts.findIndex((p) => p._id === id);
     if (tempCartProducts[productIndex].qty === 1)
-      setCartProducts(tempCartProducts.filter(p => p._id !== id))
+      setCartProducts(tempCartProducts.filter((p) => p._id !== id));
     else {
       tempCartProducts[productIndex] = {
         ...tempCartProducts[productIndex],
         qty: tempCartProducts[productIndex].qty - 1,
-      }
-      setCartProducts(tempCartProducts)
+      };
+      setCartProducts(tempCartProducts);
     }
-  }
+  };
 
-  const handleMore = id => {
-    const tempCartProducts = Array.from(cartProducts)
-    const productIndex = tempCartProducts.findIndex(p => p._id === id)
+  const handleMore = (id) => {
+    const tempCartProducts = Array.from(cartProducts);
+    const productIndex = tempCartProducts.findIndex((p) => p._id === id);
 
     tempCartProducts[productIndex] = {
       ...tempCartProducts[productIndex],
       qty: tempCartProducts[productIndex].qty + 1,
-    }
+    };
 
-    setCartProducts(tempCartProducts)
-  }
+    setCartProducts(tempCartProducts);
+  };
 
   return (
     <Container
       sx={{
-        display: 'flex',
+        display: "flex",
         margin: 2,
-        justifyContent: 'space-between',
+        justifyContent: "space-between",
       }}
     >
       <ProductListCart
@@ -46,8 +51,8 @@ const CartPage = ({ cartProducts, setCartProducts }) => {
       />
       <Paper
         sx={{
-          height: '200px',
-          p: '16px',
+          height: "200px",
+          p: "16px",
         }}
       >
         <Typography>
@@ -55,13 +60,15 @@ const CartPage = ({ cartProducts, setCartProducts }) => {
         </Typography>
 
         <Button
-          variant='contained'
-          children='Proceed to checkout'
+          variant="contained"
+          children="Proceed to checkout"
+          onClick={() => {
+            navigate("checkout");
+          }}
         />
       </Paper>
-
     </Container>
-  )
-}
+  );
+};
 
-export default CartPage
+export default CartPage;
