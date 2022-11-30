@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Buffalo",
+    "description": "This is a very tough Buffalo",
+    "price": "1999.99",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu5_35BrTD-TgsTsvXwS8gsCVhUQ52zEufBMJrEHMgjQ&s"
+  },
+  {
+    "name": "Another Buffalo",
+    "description": "This one is not that tough",
+    "price": "999.99",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGr61WmE673pckC9SaYZ2gysxQZGDgF1hUcw&usqp=CAU"
+  }
+]
