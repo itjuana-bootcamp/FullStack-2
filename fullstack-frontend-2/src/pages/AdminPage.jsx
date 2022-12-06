@@ -5,23 +5,25 @@ import AddProductModal from "../modals/AddProductModal";
 import ProductListAdmin from "../components/ProductListAdmin";
 import Container from "@mui/material/Container";
 import EditProductModal from "../modals/EditProductModal";
+import { deleteProduct, saveProduct, updateProduct } from "../api/productsApi";
 
 const AdminPage = ({ allProducts, setAllProducts }) => {
   const [isAddProductModalVisible, setIsAddProductVisible] = useState(false);
 	const [isEditProductModalVisible, setIsEditProductModalVisible] = useState(false);
 	const [editProduct, setEditProduct] = useState();
 
-  const handleOnSubmit = (product) => {
+  const handleOnSubmit = async (product) => {
     const tempProducts = Array.from(allProducts);
     if (product._id) {
-      const productIndex = tempProducts.findIndex(p => p._id === product._id)
-      tempProducts[productIndex] = product
+      const newProduct = await updateProduct(product);
+      const productIndex = tempProducts.findIndex(p => p._id === product._id);
+      tempProducts[productIndex] = newProduct;
     }
-    else
-      tempProducts.push({
-        ...product,
-        _id: tempProducts.length + 1, // Add an id when storing
-      });
+    else {
+      const newProduct = await saveProduct(product);
+      if (newProduct)
+        tempProducts.push(newProduct);
+    }
     setAllProducts(tempProducts);
   };
 
@@ -30,8 +32,11 @@ const AdminPage = ({ allProducts, setAllProducts }) => {
     setEditProduct(product)
   }
 
-  const handleOnDelete = id =>
-    setAllProducts(prev => prev.filter(p => p._id !== id))
+  const handleOnDelete = async id => {
+    const response = await deleteProduct(id);
+    if (response)
+      setAllProducts(prev => prev.filter(p => p._id !== id));
+  }
 
   return (
     <Container maxWidth="lg" sx={{ margin: 2 }}>

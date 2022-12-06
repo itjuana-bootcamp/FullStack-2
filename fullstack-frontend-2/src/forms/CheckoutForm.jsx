@@ -6,23 +6,23 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 const CheckoutForm = ({ onSubmit, setIsValid }) => {
   const localDefaultValues = useRef({
-    fullName: "",
+    name: "",
     email: "",
     address: "",
     city: "",
     state: "",
     zipCode: "",
-    phoneNumber: "",
+    phone: "",
   });
 
   const productFormSchema = yup.object().shape({
-    fullName: yup.string().required("You need to add a fullname"),
+    name: yup.string().required("You need to add a fullname"),
     email: yup.string().email().required("You need to add a email"),
     address: yup.string().required("You need to add a address"),
     city: yup.string().required("You need to add a city"),
     state: yup.string().required("You need to add a state"),
     zipCode: yup.number().required().typeError("You need to add a zipCode"),
-    phoneNumber: yup
+    phone: yup
       .number()
       .required()
       .typeError("You need to add a phone number"),
@@ -54,7 +54,7 @@ const CheckoutForm = ({ onSubmit, setIsValid }) => {
         <Grid item xs={12} sm={6} md={6}>
           <Controller
             control={control}
-            name="fullName"
+            name="name"
             render={({ field, fieldState }) => (
               <TextField
                 {...field}
@@ -150,7 +150,7 @@ const CheckoutForm = ({ onSubmit, setIsValid }) => {
         <Grid item xs={12} sm={6} md={6}>
           <Controller
             control={control}
-            name="phoneNumber"
+            name="phone"
             render={({ field, fieldState }) => (
               <TextField
                 {...field}

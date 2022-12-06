@@ -1,14 +1,24 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import AdminPage from "./pages/AdminPage";
 import Shop from "./pages/Shop";
 import { Route, Routes } from "react-router-dom";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
+import { getProducts } from "./api/productsApi";
 
 function App() {
   const [allProducts, setAllProducts] = useState([]);
   const [cartProducts, setCartProducts] = useState([]);
+
+  useEffect(() => {
+    getAllProducts()
+  }, [])
+
+  const getAllProducts = async () => {
+    const products = await getProducts();
+    setAllProducts(products);
+  }
 
   const cartProductsQty = cartProducts
     .map((cp) => cp.qty)

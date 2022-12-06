@@ -4,6 +4,7 @@ import { Button, Container, Grid, Paper, Typography } from "@mui/material";
 
 import CheckoutForm from "../forms/CheckoutForm";
 import ProductListCheckout from "../components/ProductListCheckout";
+import { saveOrder } from "../api/ordersApi";
 
 const CheckoutPage = ({ cartProducts, setCartProducts }) => {
   const [isValid, setIsValid] = useState(false);
@@ -14,10 +15,18 @@ const CheckoutPage = ({ cartProducts, setCartProducts }) => {
     .reduce((prev, curr) => prev + curr, 0)
     .toFixed(2);
 
-  const handleOnSubmit = (checkoutInfo) => {
-    console.log("checkoutInfo", checkoutInfo);
-    setCartProducts([]);
+  const handleOnSubmit = async (checkoutInfo) => {
+    const order = {
+      ...checkoutInfo,
+      products: cartProducts.map(cp => cp._id),
+      total,
+    }
 
+    const response = await saveOrder(order);
+
+    console.log("Database response", response);
+
+    setCartProducts([]);
     navigate("/");
   };
 
