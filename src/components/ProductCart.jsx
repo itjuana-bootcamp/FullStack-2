@@ -7,7 +7,7 @@ import { Box, Typography } from "@mui/material";
 const ProductCart = ({ product, handleLess, handleMore }) => {
   return (
     <>
-      <ProductInfo product={product} >
+      <ProductInfo product={product} />
       <Stack direction="row">
         <Button
           onClick={() => handleLess(product._id)}
